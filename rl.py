@@ -30,7 +30,7 @@ def learning_rate(n : int , min_rate=1e-1 ) -> float  :
 
 def exploration_rate(n : int, min_rate=1e-6 ) -> float :
     """Decaying exploration rate"""
-    return max(min_rate, 0.999**(100*n))
+    return max(min_rate, 0.999**(50*n))
 
 n_episodes = 150
 total_rewards = []
@@ -56,7 +56,7 @@ for e in range(n_episodes):
         new_state, reward, done, _, info = env.step(action)
 
         if not done:
-            total_reward += 1
+            total_reward += reward > 0
         
         # Update Q-Table
         lr = learning_rate(e)
@@ -67,7 +67,7 @@ for e in range(n_episodes):
         current_state = new_state
         
         # Render game
-        #env.render()
+        env.render()
 
     #print("esp = %s, scores = %s" % (e, total_reward))
     total_rewards.append(total_reward)

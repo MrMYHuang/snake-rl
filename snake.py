@@ -64,15 +64,15 @@ class Game:
         if self.snake.x == self.food.x and self.snake.y == self.food.y:
             self.snake.grow()
             self.food = Food(self.GRID_WIDTH, self.GRID_HEIGHT, self.BLOCK_SIZE)
-            reward = 1
+            reward = 10
         else:
-            reward = 0
+            reward = -1
         
         # Check for collision with Snake or wall
         done = self.snake.check_collision()
 
         if done:
-            reward = -100
+            reward = -1000
             head = self.snake.body[0]
             self.snake.body[0] = (head[0] - self.snake.dx,  head[1] - self.snake.dy)
 

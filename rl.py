@@ -32,12 +32,12 @@ def exploration_rate(n : int, min_rate=1e-6 ) -> float :
     """Decaying exploration rate"""
     return max(min_rate, 0.999**(50*n))
 
-n_episodes = 150
+n_epochs = 150
 total_rewards = []
 avg_rewards = []
 fig, ax1 = plt.subplots()
 ax2 = ax1.twinx()
-for e in range(n_episodes):
+for e in range(n_epochs):
     
     # Siscretize state into buckets
     current_state, _ = env.reset()
@@ -74,7 +74,7 @@ for e in range(n_episodes):
     avg_rewards.append(np.average(total_rewards))
     ax1.cla()
     ax2.cla()
-    ax1.set_xlabel('episode')
+    ax1.set_xlabel('epoch')
     ax1.plot(list(range(e+1)), total_rewards, 'g')
     ax1.set_ylabel('scores', color='g')
     ax2.plot(list(range(e+1)), avg_rewards, 'b')
